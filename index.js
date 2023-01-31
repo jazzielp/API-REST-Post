@@ -2,6 +2,7 @@ require('dotenv').config()
 require('./database/connect')
 const cors = require('cors')
 const express = require('express')
+const { logErrors, errorHandler } = require('./middlewares/error.handler')
 const app = express()
 const port = process.env.PORT || 3000
 const routerApi = require('./routers')
@@ -14,6 +15,9 @@ app.get('/', (req, res) => {
 })
 
 routerApi(app)
+
+app.use(logErrors)
+app.use(errorHandler)
 
 app.listen(port, () => {
   console.log('API-REST lista en el puerto ' + port)
