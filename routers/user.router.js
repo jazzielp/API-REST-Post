@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
       res.json(resp)
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
@@ -26,7 +26,7 @@ router.get('/:id', (req, res, next) => {
       })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
@@ -41,7 +41,7 @@ router.post('/', (req, res, next) => {
       })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
@@ -58,7 +58,7 @@ router.patch('/:id', (req, res, next) => {
       })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
