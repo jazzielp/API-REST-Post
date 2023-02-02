@@ -5,28 +5,30 @@ const servicesUser = new UserServices()
 const { createUserSchema, updateUserSchema, getUserSchema } = require('../schemas/user.schema')
 const validatorHandler = require('../middlewares/validator.handler')
 
-// Ver el listado de los usuario
+// list users
 router.get('/', (req, res, next) => {
   servicesUser.find()
     .then(resp => {
-      res.json(resp)
+      res.status(200).json({
+        message: 'success: Users found',
+        data: resp
+      })
     })
     .catch(err => {
       next(err)
     })
 })
 
-// Buscar un usuario
+// find user by id
 router.get('/:id',
   validatorHandler(getUserSchema, 'params'),
   (req, res, next) => {
     const { id } = req.params
-    console.log('entra')
     servicesUser.findOne(id)
       .then(resp => {
-        res.json({
-          message: resp,
-          id
+        res.status(200).json({
+          message: 'success: User found',
+          data: resp
         })
       })
       .catch(err => {
@@ -34,16 +36,17 @@ router.get('/:id',
       })
   })
 
-// Crear un usuario
+// Create user
 router.post('/',
   validatorHandler(createUserSchema, 'body'),
   (req, res, next) => {
     const data = req.body
     servicesUser.create(data)
       .then(resp => {
-        res.json({
-          message: resp,
-          data
+        delete resp.password
+        res.status(201).json({
+          message: 'Success : User created',
+          data: resp
         })
       })
       .catch(err => {
@@ -51,7 +54,7 @@ router.post('/',
       })
   })
 
-// Editar un usuario
+// update user
 router.patch('/:id',
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
@@ -60,10 +63,9 @@ router.patch('/:id',
     const data = req.body
     servicesUser.update(id, data)
       .then(resp => {
-        res.json({
-          message: 'Usuario editado',
-          id,
-          data
+        res.status(200).json({
+          message: 'Success: user edited',
+          data: resp
         })
       })
       .catch(err => {
@@ -71,15 +73,15 @@ router.patch('/:id',
       })
   })
 
-// Eliminar usuario
+// delete user
 router.delete('/:id',
   validatorHandler(getUserSchema, 'params'),
   (req, res, next) => {
     const { id } = req.params
     servicesUser.delete(id)
       .then(resp => {
-        res.json({
-          message: resp,
+        res.status(200).json({
+          message: 'Success: User deleted',
           id
         })
       })
