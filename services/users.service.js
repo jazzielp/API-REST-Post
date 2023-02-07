@@ -27,7 +27,11 @@ class UserServices {
       email
     })
     const newUser = await user.save()
-    return newUser
+    return {
+      username: newUser.username,
+      name: newUser.name,
+      id: newUser._id
+    }
   }
 
   async update (id, data) {
@@ -36,7 +40,8 @@ class UserServices {
   }
 
   async delete (id) {
-    return 'Delete from service'
+    const user = await User.findByIdAndRemove(id)
+    return user
   }
 }
 
