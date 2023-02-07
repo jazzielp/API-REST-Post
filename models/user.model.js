@@ -5,12 +5,12 @@ const userSchema = new Schema({
     type: String,
     unique: true
   },
-  name: String,
-  password: String,
   email: {
     type: String,
     unique: true
-  }
+  },
+  name: String,
+  password: String
 })
 
 userSchema.set('toJSON', {

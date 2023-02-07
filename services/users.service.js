@@ -1,5 +1,6 @@
 // Archivo donde estan los servicios que se conectan a la base de datos
 const User = require('../models/user.model')
+const bcrypt = require('bcrypt')
 
 class UserServices {
   async find () {
@@ -20,10 +21,11 @@ class UserServices {
 
   async create (data) {
     const { username, name, password, email } = data
+    const passwordHash = await bcrypt.hash(password, 10)
     const user = User({
       username,
       name,
-      password,
+      password: passwordHash,
       email
     })
     const newUser = await user.save()
