@@ -9,7 +9,7 @@ const routerApi = require('./routers')
 
 app.use(express.json())
 app.use(cors())
-
+require('./utils/auth')
 app.get('/', (req, res) => {
   res.send('Welcome to Api Post')
 })

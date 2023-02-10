@@ -6,7 +6,9 @@ class UserServices {
   async find () {
     const users = await User.find({}, {
       username: 1,
-      name: 1
+      name: 1,
+      role: 1,
+      email: 1
     })
     return users
   }
@@ -14,8 +16,14 @@ class UserServices {
   async findOne (id) {
     const user = await User.findById(id, {
       username: 1,
-      name: 1
+      name: 1,
+      role: 1
     })
+    return user
+  }
+
+  async findByEmail (email) {
+    const user = await User.findOne({ email })
     return user
   }
 

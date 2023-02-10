@@ -10,7 +10,11 @@ const userSchema = new Schema({
     unique: true
   },
   name: String,
-  password: String
+  password: String,
+  role: {
+    type: String,
+    default: 'user'
+  }
 })
 
 userSchema.set('toJSON', {
