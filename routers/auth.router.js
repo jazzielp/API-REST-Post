@@ -8,16 +8,20 @@ router.post('/',
   passport.authenticate('local', { session: false }),
   async (req, res, next) => {
     try {
-      const user = req.user
+      const { id, username, name, role } = req.user
       const payload = {
-        id: user.id,
-        role: user.role
+        id,
+        role
       }
       const token = jwt.sign(payload, config.jwtSecret)
       res.status(200).json({
         message: 'success',
         data: {
-          user,
+          user: {
+            username,
+            name,
+            role
+          },
           token
         }
       })
