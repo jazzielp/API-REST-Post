@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,15 @@
     "standard": "^17.0.0"
   },
   "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
+    "extends": "./node_modules/standard/eslintrc.json",
+    "env": {
+      "jest": true
+    }
   },
+  "jest": {
+    "testEnvironment": "node"
+  }
+  ,
   "dependencies": {
     "@hapi/boom": "^10.0.0",
     "bcrypt": "^5.1.0",
