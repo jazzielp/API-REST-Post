@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jazzielp/API-REST-Post#readme",
   "devDependencies": {
+    "jest": "^29.4.3",
     "standard": "^17.0.0"
   },
   "eslintConfig": {
